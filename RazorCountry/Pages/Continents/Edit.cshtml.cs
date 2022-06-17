@@ -11,6 +11,7 @@ namespace RazorCountry.Pages.Continents
     public class EditModel : PageModel
     {
         private readonly CountryContext _context;
+
         public EditModel(CountryContext context)
         {
             _context = context;
@@ -28,6 +29,7 @@ namespace RazorCountry.Pages.Continents
             else
             {
                 Continent = await _context.Continents.FindAsync(id);
+
                 if (Continent == null)
                 {
                     return NotFound();
@@ -42,7 +44,6 @@ namespace RazorCountry.Pages.Continents
             {
                 return Page();
             }
-
             if (id == null)
             {
                 _context.Continents.Add(Continent);
@@ -53,6 +54,7 @@ namespace RazorCountry.Pages.Continents
             }
 
             await _context.SaveChangesAsync();
+
             return RedirectToPage("./Index");
         }
     }
