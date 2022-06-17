@@ -30,16 +30,17 @@ namespace RazorCountry.Pages.Continents
             {
                 return NotFound();
             }
-            else
+
+            Continent Continent = await _context.Continents.FindAsync(id);
+
+            if (Continent != null)
             {
-                Continent Continent = await _context.Continents.FindAsync(id);
-                if (Continent != null)
-                {
-                    _context.Continents.Remove(Continent);
-                    await _context.SaveChangesAsync();
-                }
-                return RedirectToPage("./Index");
+                _context.Continents.Remove(Continent);
             }
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("./Index");
         }
     }
 }
