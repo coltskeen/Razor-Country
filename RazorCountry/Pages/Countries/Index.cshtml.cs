@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RazorCountry.Models;
 using RazorCountry.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace RazorCountry.Pages.Countries
 {
@@ -24,6 +25,10 @@ namespace RazorCountry.Pages.Countries
         [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; }
 
+        //public sorting field for the form post back with default of "Name"
+        [BindProperty(SupportsGet = true)]
+        public string SortField { get; set; } = "Name";
+
         public async Task OnGetAsync()
         {
             //Defaults to search all
@@ -34,6 +39,20 @@ namespace RazorCountry.Pages.Countries
             if (!string.IsNullOrEmpty(SearchString))
             {
                 countries = countries.Where(c => c.Name.Contains(SearchString));
+            }
+
+            //Switch statement for the selected column names with sorting
+            switch (SortField)
+            {
+                case "ID":
+                    countries = countries.OrderBy(c => c.ID);
+                    break;
+                case "Name":
+                    countries = countries.OrderBy(c => c.Name);
+                    break;
+                case "ContinentID":
+                    countries = countries.OrderBy(c => c.ContinentID);
+                    break;
             }
 
             //ToListAsync() gets the results

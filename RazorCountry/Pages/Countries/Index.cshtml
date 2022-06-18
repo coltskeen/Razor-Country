@@ -19,6 +19,12 @@
     <label asp-for="SearchString" class="control-label">Name: </label>
     <input class="p-2" type="text" asp-for="SearchString" />
     <input type="submit" value="Search" class="btn btn-primary btn-sm" />
+    <label asp-for="SortField" class="control-label">Sort by:</label>
+    <select class="p-2" asp-for="SortField" onchange="this.form.submit();">
+        <option value="ID">Code</option>
+        <option value="ContinentID">Cont</option>
+        <option value="Name">Name</option>
+    </select>
 </form>
 
 <div class="d-flex bg-success text-white">
