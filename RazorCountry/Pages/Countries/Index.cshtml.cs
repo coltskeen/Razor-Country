@@ -29,6 +29,11 @@ namespace RazorCountry.Pages.Countries
         [BindProperty(SupportsGet = true)]
         public string SortField { get; set; } = "Name";
 
+        //Added properties for selected lists the current selection
+        public SelectList Continents { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public string SelectedContinent { get; set; }
+
         public async Task OnGetAsync()
         {
             //Defaults to search all
@@ -53,6 +58,20 @@ namespace RazorCountry.Pages.Countries
                 case "ContinentID":
                     countries = countries.OrderBy(c => c.ContinentID);
                     break;
+            }
+
+            //LINQ query to get all the continent IDs sorted by by
+            IQueryable<string> continentQuery = from c in _context.Continents
+                                                orderby c.ID
+                                                select c.ID;
+
+            //Returns the query to the SelectList each time the page does a get
+            Continents = new SelectList(await continentQuery.ToListAsync());
+
+            //Modifier for the country LINQ query to check for a selected continent and add that condition
+            if (!string.IsNullOrEmpty(SelectedContinent))
+            {
+                countries = countries.Where(c => c.ContinentID == SelectedContinent);
             }
 
             //ToListAsync() gets the results
