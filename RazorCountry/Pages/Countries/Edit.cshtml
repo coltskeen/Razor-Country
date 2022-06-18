@@ -26,8 +26,7 @@
     <div class="form-group d-flex">
         <label asp-for="Country.ContinentID" class="p-2 text-right" style="flex:0 0 15%"></label>
         <div style="flex:1 0 auto;width:auto">
-            <input asp-for="Country.ContinentID" class="form-control" />
-            <span asp-validation-for="Country.ContinentID" class="text-danger"></span>
+            <select asp-for="Country.ContinentID" asp-items="Model.Continents" class="form-control"></select>
         </div>
     </div>
     <div class="form-group d-flex">

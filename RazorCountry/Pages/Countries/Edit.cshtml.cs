@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RazorCountry.Models;
 using RazorCountry.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace RazorCountry.Pages.Countries
 {
@@ -19,6 +20,9 @@ namespace RazorCountry.Pages.Countries
 
         [BindProperty]
         public Country Country { get; set; }
+
+        //Added member property to hold the SelectList
+        public SelectList Continents { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
@@ -35,6 +39,9 @@ namespace RazorCountry.Pages.Countries
                     return NotFound();
                 }
             }
+
+            //Filling the continents select list from the EF context and specifying the source DbSet, key, and display value parameters
+            Continents = new SelectList(_context.Continents, nameof(Continent.ID), nameof(Continent.Name));
             return Page();
         }
 

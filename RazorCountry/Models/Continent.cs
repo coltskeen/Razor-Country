@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace RazorCountry.Models
 {
@@ -17,6 +18,9 @@ namespace RazorCountry.Models
          * [Display(Name = "Code")] --> Makes the display name more friendly
          * [RegularExpression ... ] --> Accepts only uppercase input and returns en error otherwise
          */
+
+        //navigation property in EF that shows that tells it that continents have a collection of countries
+        public ICollection<Country> Countries { get; set; }
     }
 }
 
