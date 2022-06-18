@@ -21,7 +21,12 @@ namespace RazorCountry.Pages.Continents
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
-            Continent = await _context.Continents.FindAsync(id);
+            //Continent = await _context.Continents.FindAsync(id);
+
+            /* Instead of FindAsync() using FirstOrDefaultAsync() 
+             * because it has more flexibility finding more then just the id.
+             */
+            Continent = await _context.Continents.FirstOrDefaultAsync(m => m.ID == id);
 
             if (Continent == null)
             {

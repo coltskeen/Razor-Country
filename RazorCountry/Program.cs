@@ -27,7 +27,7 @@ namespace RazorCountry
                 var services = scope.ServiceProvider;
                 var context = services.GetRequiredService<CountryContext>();
                 //context.Database.EnsureCreated();
-                DbInitializer.Initialize(context);
+                DbInitializerFull.Initialize(context);
             }
         }
 
