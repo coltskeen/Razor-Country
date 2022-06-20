@@ -65,8 +65,9 @@
             <a class="btn btn-primary btn-sm" asp-page="./Edit" asp-route-id="@item.ID">
                 Edit
             </a>
-            <input type="submit" value="Delete" class="btn btn-danger btn-sm" />
-            <input type="hidden" name="ID" value="@item.ID" />
+            <a class="btn btn-danger btn-sm" asp-page="./Delete" asp-route-id="@item.ID">
+                Delete
+            </a>
         </form>
     </div>
 }

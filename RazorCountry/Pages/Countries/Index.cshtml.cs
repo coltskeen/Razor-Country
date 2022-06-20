@@ -78,24 +78,25 @@ namespace RazorCountry.Pages.Countries
             Countries = await countries.ToListAsync();
         }
 
+        //COMMENTED OUT TO ADD A DELETE PAGE INSTEAD OF SIMPLE DELETE FEATURE
+        /******************************************************************/
+        //public async Task<IActionResult> OnPostAsync(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-        public async Task<IActionResult> OnPostAsync(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //    Country Country = await _context.Countries.FindAsync(id);
 
-            Country Country = await _context.Countries.FindAsync(id);
+        //    if (Country != null)
+        //    {
+        //        _context.Countries.Remove(Country);
+        //    }
 
-            if (Country != null)
-            {
-                _context.Countries.Remove(Country);
-            }
+        //    await _context.SaveChangesAsync();
 
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
-        }
+        //    return RedirectToPage("./Index");
+        //}
     }
 }
