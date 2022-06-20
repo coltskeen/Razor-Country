@@ -4,8 +4,62 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="jumbotron p-3 d-flex align-items-center">
+    <h1 class="display-4 flex-grow-1 text-center">
+        Welcome to Razor Country
+    </h1>
 </div>
 
+<div class="text-center">
+    <h1 class="display-4">Continent List</h1>
+</div>
+<div class="d-flex bg-primary text-white">
+    <div class="p-2" style="flex:0 0 10%">
+        Code
+    </div>
+    <div class="p-2" style="flex:1 0 auto">
+        Name
+    </div>
+</div>
+
+@foreach (var item in Model.Continents)
+{
+    <div class="d-flex border-left border-right border-bottom border-primary">
+        <div class="p-2" style="flex:0 0 10%">
+            @item.ID
+        </div>
+        <div class="p-2" style="flex:1 0 auto">
+            @item.Name
+        </div>
+    </div>
+}
+
+<div class="text-center">
+    <h1 class="display-4">Country List</h1>
+</div>
+<div class="d-flex bg-primary text-white">
+    <div class="p-2" style="flex:0 0 10%">
+        Cont
+    </div>
+    <div class="p-2" style="flex:0 0 10%">
+        Code
+    </div>
+    <div class="p-2" style="flex:1 0 auto">
+        Name
+    </div>
+</div>
+
+@foreach (var item in Model.Countries)
+{
+    <div class="d-flex border-left border-right border-bottom border-primary">
+        <div class="p-2" style="flex:0 0 10%">
+            @item.ID
+        </div>
+        <div class="p-2" style="flex:0 0 10%">
+            @item.ContinentID
+        </div>
+        <div class="p-2" style="flex:1 0 auto">
+            @item.Name
+        </div>
+    </div>
+}

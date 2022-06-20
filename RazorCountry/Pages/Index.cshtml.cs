@@ -5,21 +5,28 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using RazorCountry.Models;
+using RazorCountry.Data;
 
 namespace RazorCountry.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly CountryContext _context;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(CountryContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public void OnGet()
-        {
+        public List<Continent> Continents { get; set; }
+        public List<Country> Countries { get; set; }
 
+        public async Task OnGetAsync()
+        {
+            Countries = await _context.Countries.ToListAsync();
+            Continents = await _context.Continents.ToListAsync();
         }
     }
 }
